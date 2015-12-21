@@ -1,0 +1,8 @@
+{
+  "name": "my-flux-app",
+  "version": "0.1.0",
+  "dependencies": {
+    "jQuery": "~2.1.4",
+    "bootstrap": "~3.3.6"
+  }
+}
