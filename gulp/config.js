@@ -18,6 +18,7 @@ module.exports = {
     src: src + '/styles/**/*.{sass,scss,css}',
     dest: dest + '/styles',
     settings: {
+      style:'compressed',
       indentedSyntax: false, // Enable .sass syntax?
       imagePath: '/images' // Used by the image-url helper
     }
@@ -33,8 +34,8 @@ module.exports = {
   },
   copy: [
     {src: 'src/index.html',dest: dest},
-    {src: 'bower_components/jQuery/dist/jquery.min.js',dest:dest+'/js'},
-    {src: 'bower_components/bootstrap/dist/css/bootstrap.min.css', dest:dest+'/styles'}
+    {src: 'bower_components/tinymce/**/*.*', dest:dest+'/js/tinymce'},
+    {src: 'node_modules/bootstrap-sass/assets/fonts/**/*.*', dest:dest+'/fonts'},
   ],
   watch: {
     src: 'src/**/*.*',

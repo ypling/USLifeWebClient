@@ -7,7 +7,7 @@ export default React.createClass({
   render() {
     return (
       <Router>
-        <Route path="/wiki(/:feature)" component={WikiController}/>
+        <Route path="/wiki(/**)" component={WikiController}/>
         <Route path="/" component={App}/>
       </Router>
     );
