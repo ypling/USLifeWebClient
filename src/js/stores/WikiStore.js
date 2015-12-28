@@ -10,7 +10,7 @@ import Constants from '../Constants';
 var _pageContent = "<p>Empty page</p>";
 var _currentView = Constants.WikiViews.CONTENT;
 var _folderItems;
-var _route=[];
+var _route = [];
 // add private functions to modify data
 function _editPage() {
   _currentView = Constants.WikiViews.EDITOR;
@@ -23,16 +23,26 @@ function _savePage(content) {
   WikiStore.emitChange();
 }
 
-function _cencelEdit(){
+function _cencelEdit() {
   _currentView = Constants.WikiViews.CONTENT;
   WikiStore.emitChange();
 }
 
-function _routing(route,items){
+function _routing(route, items) {
   _currentView = Constants.WikiViews.FOLDER;
   _route = route;
   _folderItems = items;
   WikiStore.emitChange();
+}
+
+function _selectPage(page){
+  _currentView = Constants.WikiViews.CONTENT;
+  _pageContent = page.content;
+  WikiStore.emitChange();
+}
+
+function _createFolder(){
+  WikiStore.emitChange();  
 }
 // Facebook style store creation.
 const WikiStore = assign({}, EventEmitter.prototype, {
@@ -45,11 +55,11 @@ const WikiStore = assign({}, EventEmitter.prototype, {
       return _currentView;
     },
 
-    getFolderItems(){
+    getFolderItems() {
       return _folderItems;
     },
 
-    getRoute(){
+    getRoute() {
       return _route;
     },
 
@@ -76,7 +86,13 @@ const WikiStore = assign({}, EventEmitter.prototype, {
           _cencelEdit();
           break;
         case Constants.ActionTypes.ROUTING:
-          _routing(action.route,action.items);
+          _routing(action.route, action.items);
+          break;
+        case Constants.ActionTypes.SELECT_PAGE:
+          _selectPage(action.page);
+          break;
+        case Constants.ActionTypes.CREATE_FOLDER:
+          _createFolder();
           break;
       }
     })

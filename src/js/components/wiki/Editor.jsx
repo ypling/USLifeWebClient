@@ -26,7 +26,7 @@ export default React.createClass({
     return (
       <div>
         <div className="row">
-            <Breadcrumb route={this.props.route}/>
+            <Breadcrumb route={this.props.route} activeLastOne={true}/>
           <div key="editorButtons" className="pull-right">
             <button className="btn btn-default" onClick={this._saveClickHandler}>
               <span className="glyphicon glyphicon-save" aria-hidden="true"></span> Save

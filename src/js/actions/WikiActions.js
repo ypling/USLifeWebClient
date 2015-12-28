@@ -42,5 +42,21 @@ export default {
         route:route,
         items:items
       });
+    },
+    selectPage(path){
+      console.log('wiki action: select page');
+      var page = api.getItem(path);
+      Dispatcher.handleViewAction({
+        type:Constants.ActionTypes.SELECT_PAGE,
+        page:page
+      })
+    },
+    createFolder(path){
+      console.log('wiki action: select page');
+      api.postItem(path);
+      location.hash='wiki/'+path;
+      Dispatcher.handleViewAction({
+        type:Constants.ActionTypes.CREATE_FOLDER
+      })
     }
 };

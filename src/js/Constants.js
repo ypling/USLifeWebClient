@@ -10,7 +10,9 @@ export default {
     EDIT_PAGE:'EDIT_PAGE',
     SAVE_PAGE:'SAVE_PAGE',
     CENCEL_EDIT:'CENCEL_EDIT',
-    ROUTING:'ROUTING'
+    ROUTING:'ROUTING',
+    SELECT_PAGE:'SELECT_PAGE',
+    CREATE_FOLDER:'CREATE_FOLDER'
   },
 
   ActionSources: {
@@ -22,6 +24,10 @@ export default {
     EDITOR:'EDITOR',
     CONTENT:'CONTENT',
     FOLDER:'FOLDER'
+  },
+  WikiItemType:{
+    FOLDER:'FOLDER',
+    FILE:'FILE'
   },
   EDITOR_MIN_HEIGHT:400
 };

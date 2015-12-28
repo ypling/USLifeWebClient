@@ -6,7 +6,7 @@ export default React.createClass({
     var _link = "";
     var listItems = this.props.route.map(function(item, index, arr) {
       _link += '/' + item;
-      if (arr.length !== index + 1) {
+      if (this.props.activeLastOne || arr.length !== index + 1) {
         return (<li key={index}>
           <a href={'#/wiki' + _link}>{item}</a>
         </li>);
@@ -14,7 +14,7 @@ export default React.createClass({
         //currentOne make it not click able
         return (<li key={index} className="active">{item}</li>);
       }
-    });
+    },this);
     return (
       <div className="pull-left">
         <ol className="breadcrumb">

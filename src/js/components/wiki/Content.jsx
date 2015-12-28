@@ -13,16 +13,8 @@ export default React.createClass({
     return (
       <div>
         <div className="row">
-            <Breadcrumb route={this.props.route}/>
+            <Breadcrumb route={this.props.route} activeLastOne={true}/>
           <div key="contentButtons" className="pull-right">
-            <button className="btn btn-default disabled" onClick={this._editClickHandler}>
-              <span className="glyphicon glyphicon-book" aria-hidden="true"></span>
-              Add Folder
-            </button>
-            <button className="btn btn-default disabled" onClick={this._editClickHandler}>
-              <span className="glyphicon glyphicon-file" aria-hidden="true"></span>
-              Add Page
-            </button>
             <button className="btn btn-default" onClick={this._editClickHandler}>
               <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
               Edit
