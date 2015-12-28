@@ -1,7 +1,7 @@
 
-# My Flux App (my-flux-app)
+# US Life Web Client App (flux-react)
+> Demo URL: https://s3-us-west-2.amazonaws.com/lmb-demo/index.html
 
-> ...
 
 ## Running your project
 
