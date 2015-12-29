@@ -11,10 +11,10 @@ export default React.createClass({
     var view;
     switch (this.props.view) {
       case Constants.WikiViews.CONTENT:
-        view = <Content route={this.props.route} pageContent={this.props.pageContent}/>;
+        view = <Content route={this.props.route} currentPage={this.props.currentPage}/>;
         break;
       case Constants.WikiViews.EDITOR:
-        view = <Editor route={this.props.route} pageContent={this.props.pageContent}/>;
+        view = <Editor route={this.props.route} currentPage={this.props.currentPage}/>;
         break;
       case Constants.WikiViews.FOLDER:
         view = <Folder route={this.props.route} items={this.props.folderItems}/>;

@@ -20,11 +20,13 @@ export default {
         type: Constants.ActionTypes.EDIT_PAGE
       });
     },
-    savePage(content) {
-      console.log("wiki action: save page, content: " + content)
+    savePage(folderPath,page) {
+      console.log("wiki action: save page, page:"+ page);
+      var path = folderPath + '/'+page.title+'.json';
+      var page = api.savePage(path, page);
       Dispatcher.handleViewAction({
         type: Constants.ActionTypes.SAVE_PAGE,
-        content: content
+        page: page
       });
     },
     cencelEdit() {
@@ -34,29 +36,29 @@ export default {
       });
     },
     routing(path) {
-      var route = path?path.split('/'):[];
+      var route = path ? path.split('/') : [];
       var items = api.getItems(route);
       console.log('wiki action: routing');
       Dispatcher.handleViewAction({
         type: Constants.ActionTypes.ROUTING,
-        route:route,
-        items:items
+        route: route,
+        items: items
       });
     },
-    selectPage(path){
+    selectPage(path) {
       console.log('wiki action: select page');
-      var page = api.getItem(path);
+      var page = api.getPage(path);
       Dispatcher.handleViewAction({
-        type:Constants.ActionTypes.SELECT_PAGE,
-        page:page
+        type: Constants.ActionTypes.SELECT_PAGE,
+        page: page
       })
     },
-    createFolder(path){
+    createFolder(path) {
       console.log('wiki action: select page');
       api.postItem(path);
-      location.hash='wiki/'+path;
+      location.hash = 'wiki/' + path;
       Dispatcher.handleViewAction({
-        type:Constants.ActionTypes.CREATE_FOLDER
+        type: Constants.ActionTypes.CREATE_FOLDER
       })
     }
 };

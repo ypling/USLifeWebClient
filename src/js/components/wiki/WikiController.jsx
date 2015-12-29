@@ -8,12 +8,12 @@ import Actions from '../../actions/WikiActions';
 export default React.createClass({
   _getStoreState() {
     //call store getters.
-    var pageContent = WikiStore.getPageContent();
+    var currentPage = WikiStore.getCurrentPage();
     var currentView = WikiStore.getCurrentView();
     var folderItems = WikiStore.getFolderItems();
     var route = WikiStore.getRoute();
     //return state object.
-    return {pageContent: pageContent, currentView: currentView, folderItems: folderItems, route: route};
+    return {currentPage: currentPage, currentView: currentView, folderItems: folderItems, route: route};
   },
   _onChange() {
     this.setState(this._getStoreState());
@@ -37,6 +37,6 @@ export default React.createClass({
   //other controller life cycles
 
   render() {
-    return (<Wiki pageContent={this.state.pageContent} view={this.state.currentView} folderItems={this.state.folderItems} route={this.state.route}/>);
+    return (<Wiki currentPage={this.state.currentPage} view={this.state.currentView} folderItems={this.state.folderItems} route={this.state.route}/>);
   }
 });

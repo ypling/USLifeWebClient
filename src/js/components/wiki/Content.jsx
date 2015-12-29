@@ -3,6 +3,7 @@ import NavBar from '../Common/NavBar.jsx';
 import Editor from './Editor.jsx';
 import Actions from '../../actions/WikiActions';
 import Breadcrumb from './Breadcrumb.jsx';
+import {PageHeader} from 'react-bootstrap';
 
 export default React.createClass({
   //react life cycles
@@ -13,18 +14,27 @@ export default React.createClass({
     return (
       <div>
         <div className="row">
+          <div className="col-xs-12">
             <Breadcrumb route={this.props.route} activeLastOne={true}/>
-          <div key="contentButtons" className="pull-right">
-            <button className="btn btn-default" onClick={this._editClickHandler}>
-              <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-              Edit
-            </button>
+            <div key="contentButtons" className="pull-right">
+              <button className="btn btn-default" onClick={this._editClickHandler}>
+                <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                &nbsp;Edit
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12">
+            <PageHeader>{this.props.currentPage.title}
+              <small>author info</small>
+            </PageHeader>
           </div>
         </div>
         <div className="row">
           <div className="col-xs-12">
             <div dangerouslySetInnerHTML={{
-              __html: this.props.pageContent
+              __html: this.props.currentPage.content
             }}></div>
           </div>
         </div>

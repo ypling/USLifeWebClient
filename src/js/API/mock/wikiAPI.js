@@ -9,10 +9,22 @@ var _pathes = [
   "feature/contact/page3.json"
 ];
 var files = {
-  "/page0.json":{content:'<p>page0 content</p>'},
-  "feature/about/page1.json":{content:'<p>page1 content</p>'},
-  "feature/about/page2.json":{content:'<p>page2 content</p>'},
-  "feature/contact/page3.json":{content:'<p>page3 content</p>'},
+  "/page0.json": {
+    title:"page0",
+    content: '<p>page0 content</p>'
+  },
+  "feature/about/page1.json": {
+    title:"page1",
+    content: '<p>page1 content</p>'
+  },
+  "feature/about/page2.json": {
+    title:"page2",
+    content: '<p>page2 content</p>'
+  },
+  "feature/contact/page3.json": {
+    title:"page3",
+    content: '<p>page3 content</p>'
+  },
 }
 export default {
   getItems(pathArr) {
@@ -49,11 +61,21 @@ export default {
       return result;
     },
 
-    getItem(path){
+    getPage(path) {
       return files[path];
     },
 
     postItem(path) {
       _pathes.push(path);
+    },
+
+    savePage(path, page) {
+      if (files[path]) {
+        files[path]=page;
+      } else {
+        files[path]=page;
+        _pathes.push(path);
+      }
+      return files[path];
     }
 }

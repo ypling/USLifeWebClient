@@ -17,10 +17,10 @@ export default React.createClass({
       location.hash = 'wiki/' + this.props.route.join('/') + '/' + item.path;
     }
   },
-  _createFolderClickHandler(){
-    var folderName = prompt('create folder','please enter a folder name');
-    if(folderName){
-      Actions.createFolder(this.props.route.join('/')+'/'+folderName);
+  _createFolderClickHandler() {
+    var folderName = prompt('create folder', 'please enter a folder name');
+    if (folderName) {
+      Actions.createFolder(this.props.route.join('/') + '/' + folderName);
     }
   },
   render() {
@@ -38,16 +38,18 @@ export default React.createClass({
     return (
       <div>
         <div className="row">
-          <Breadcrumb route={this.props.route} activeLastOne={false}/>
-          <div key="contentButtons" className="pull-right">
-            <button className="btn btn-default" onClick={this._createFolderClickHandler}>
-              <span className="glyphicon glyphicon-book" aria-hidden="true"></span>
-              Create Folder
-            </button>
-            <button className="btn btn-default" onClick={this._editClickHandler}>
-              <span className="glyphicon glyphicon-file" aria-hidden="true"></span>
-              Add Page
-            </button>
+          <div className="col-xs-12">
+            <Breadcrumb route={this.props.route} activeLastOne={false}/>
+            <div key="contentButtons" className="pull-right">
+              <button className="btn btn-default" onClick={this._createFolderClickHandler}>
+                <span className="glyphicon glyphicon-book" aria-hidden="true"></span>
+                &nbsp;Create Folder
+              </button>
+              <button className="btn btn-default" onClick={this._editClickHandler}>
+                <span className="glyphicon glyphicon-file" aria-hidden="true"></span>
+                &nbsp;Add Page
+              </button>
+            </div>
           </div>
         </div>
         <div className="row">

@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
+    "react-bootstrap": "^0.28.1",
     "react-tinymce": "^0.4.0",
     "tinymce": "^4.3.2"
   }
