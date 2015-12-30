@@ -30,10 +30,10 @@ export default {
         page: page
       });
     },
-    cencelEdit() {
+    cancelEdit() {
       console.log('wiki action: cencel edit');
       Dispatcher.handleViewAction({
-        type: Constants.ActionTypes.CENCEL_EDIT,
+        type: Constants.ActionTypes.CANCEL_EDIT,
       });
     },
     routing(path) {

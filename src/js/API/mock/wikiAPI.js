@@ -9,7 +9,7 @@ var _pathes = [
   "feature/contact/page3.json"
 ];
 var _files = {
-  "/page0.json": {
+  "page0.json": {
     title:"page0",
     content: '<p>page0 content</p>'
   },

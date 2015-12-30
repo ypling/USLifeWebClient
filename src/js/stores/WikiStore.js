@@ -23,7 +23,7 @@ function _savePage(page) {
   WikiStore.emitChange();
 }
 
-function _cencelEdit() {
+function _cancelEdit() {
   _currentView = (_currentPage)?Constants.WikiViews.CONTENT:Constants.WikiViews.FOLDER;
   WikiStore.emitChange();
 }
@@ -88,8 +88,8 @@ const WikiStore = assign({}, EventEmitter.prototype, {
         case Constants.ActionTypes.SAVE_PAGE:
           _savePage(action.page);
           break;
-        case Constants.ActionTypes.CENCEL_EDIT:
-          _cencelEdit();
+        case Constants.ActionTypes.CANCEL_EDIT:
+          _cancelEdit();
           break;
         case Constants.ActionTypes.ROUTING:
           _routing(action.route, action.items);
