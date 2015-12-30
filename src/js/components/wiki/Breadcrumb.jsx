@@ -17,9 +17,9 @@ export default React.createClass({
     },this);
     return (
       <div className="pull-left">
-        <ol className="breadcrumb">
+        {listItems.length?<ol className="breadcrumb">
           {listItems}
-        </ol>
+        </ol>:null}
       </div>
     );
   }

@@ -8,7 +8,7 @@ var _pathes = [
   "feature/contact",
   "feature/contact/page3.json"
 ];
-var files = {
+var _files = {
   "/page0.json": {
     title:"page0",
     content: '<p>page0 content</p>'
@@ -34,14 +34,15 @@ export default {
         var arr = item.split('/');
         var type = (arr[0].indexOf('.json') !== -1) ? 'FILE' : 'FOLDER';
         var found = {
-          path: arr[0],
+          name: arr[0],
+          path: item,
           type: type
         };
         if (pathArr.length > 0) {
           pathArr.every(function(item, index) {
             var target = arr[index];
             if (target && target === item) {
-              found.path = arr[index + 1];
+              found.name = arr[index + 1];
               if (arr[index + 1]) {
                 found.type = (arr[index + 1].indexOf('.json') !== -1) ? 'FILE' : 'FOLDER';
               }
@@ -51,31 +52,37 @@ export default {
             return false;
           });
         }
-        if (found && found.path && resultHash[found.path] === undefined) {
-          resultHash[found.path] = found;
+        if (found && found.name && resultHash[found.name] === undefined) {
+          resultHash[found.name] = found;
         }
       });
       Object.keys(resultHash).forEach(function(key) {
-        result.push(resultHash[key]);
+        var item = resultHash[key];
+        item.name = item.name.split('.')[0];
+        result.push(item);
       });
       return result;
     },
 
     getPage(path) {
-      return files[path];
+      return _files[path];
     },
 
     postItem(path) {
       _pathes.push(path);
     },
 
-    savePage(path, page) {
-      if (files[path]) {
-        files[path]=page;
-      } else {
-        files[path]=page;
-        _pathes.push(path);
+    savePage(oldPath, newPath, page) {
+      if(oldPath){
+        delete _files[oldPath];
       }
-      return files[path];
+      var pathIndex = _pathes.indexOf(oldPath)
+      if(pathIndex!==-1){
+        _pathes[pathIndex] = newPath;
+      }else{
+        _pathes.push(newPath);
+      }
+      _files[newPath]=page;
+      return _files[newPath];
     }
 }

@@ -20,10 +20,11 @@ export default {
         type: Constants.ActionTypes.EDIT_PAGE
       });
     },
-    savePage(folderPath,page) {
+    savePage(folderPath,oldTitle,page) {
       console.log("wiki action: save page, page:"+ page);
-      var path = folderPath + '/'+page.title+'.json';
-      var page = api.savePage(path, page);
+      var oldPath = folderPath + '/'+oldTitle+'.json';
+      var newPath = folderPath + '/'+page.title+'.json';
+      var page = api.savePage(oldPath, newPath, page);
       Dispatcher.handleViewAction({
         type: Constants.ActionTypes.SAVE_PAGE,
         page: page
@@ -45,13 +46,18 @@ export default {
         items: items
       });
     },
-    selectPage(path) {
-      console.log('wiki action: select page');
-      var page = api.getPage(path);
-      Dispatcher.handleViewAction({
-        type: Constants.ActionTypes.SELECT_PAGE,
-        page: page
-      })
+    selectItem(item) {
+      if(item.type === Constants.WikiItemType.FOLDER){
+        console.log('wiki action: select item, folder');
+        location.hash = 'wiki/'+item.path;
+      }else{
+        console.log('wiki action: select item, page');
+        var page = api.getPage(item.path);
+        Dispatcher.handleViewAction({
+          type: Constants.ActionTypes.SELECT_PAGE,
+          page: page
+        })
+      }
     },
     createFolder(path) {
       console.log('wiki action: select page');
@@ -59,6 +65,12 @@ export default {
       location.hash = 'wiki/' + path;
       Dispatcher.handleViewAction({
         type: Constants.ActionTypes.CREATE_FOLDER
+      })
+    },
+    createPage(){
+      console.log('wiki action: create page');
+      Dispatcher.handleViewAction({
+        type:Constants.ActionTypes.CREATE_PAGE
       })
     }
 };

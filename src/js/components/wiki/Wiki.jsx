@@ -19,6 +19,9 @@ export default React.createClass({
       case Constants.WikiViews.FOLDER:
         view = <Folder route={this.props.route} items={this.props.folderItems}/>;
         break;
+      default:
+        view = null;
+        break;
     }
     return (
       <div className="container-fluid">

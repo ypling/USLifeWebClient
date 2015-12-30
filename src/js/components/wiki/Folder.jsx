@@ -11,11 +11,7 @@ export default React.createClass({
     Actions.editPage();
   },
   _itemClickHandler(item) {
-    if (item.type === Constants.WikiItemType.FILE) {
-      Actions.selectPage(this.props.route.join('/') + '/' + item.path);
-    } else {
-      location.hash = 'wiki/' + this.props.route.join('/') + '/' + item.path;
-    }
+      Actions.selectItem(item);
   },
   _createFolderClickHandler() {
     var folderName = prompt('create folder', 'please enter a folder name');
@@ -23,15 +19,18 @@ export default React.createClass({
       Actions.createFolder(this.props.route.join('/') + '/' + folderName);
     }
   },
+  _createPageClickHandler(){
+    Actions.createPage();
+  },
   render() {
     var items = this.props.items.map(function(item, index) {
       var icon = (item.type === Constants.WikiItemType.FOLDER)
         ? 'glyphicon glyphicon-folder-close'
         : 'glyphicon glyphicon-file';
       return (
-        <div key={this.props.route.join('/') + item.path}>
+        <div key={this.props.route.join('/') + item.name}>
           <a onClick={this._itemClickHandler.bind(this, item)}>
-            <span className={icon}></span>{item.path}</a>
+            <span className={icon}></span>{item.name}</a>
         </div>
       );
     }, this);
@@ -45,7 +44,7 @@ export default React.createClass({
                 <span className="glyphicon glyphicon-book" aria-hidden="true"></span>
                 &nbsp;Create Folder
               </button>
-              <button className="btn btn-default" onClick={this._editClickHandler}>
+              <button className="btn btn-default" onClick={this._createPageClickHandler}>
                 <span className="glyphicon glyphicon-file" aria-hidden="true"></span>
                 &nbsp;Add Page
               </button>

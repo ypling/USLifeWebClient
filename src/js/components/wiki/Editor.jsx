@@ -8,18 +8,26 @@ import {Input} from 'react-bootstrap';
 
 export default React.createClass({
   _editorContent: undefined,
+  _title:undefined,
+  _oldTitle:undefined,
   //react life cycles
-  componentDidMount() {
-    this._editorContent = this.props.currentPage.content;
+  componentWillMount() {
+    if(this.props.currentPage){
+      this._editorContent = this.props.currentPage.content;
+      this._title = this.props.currentPage.title;
+      this._oldTitle = this.props.currentPage.title;
+    }
   },
   //private
   _editorChangeHandler(event) {
-    console.log(event.target.getContent());
     this._editorContent = event.target.getContent();
   },
+  _titleChangeHandler(event){
+    this._title = event.target.value;
+  },
   _saveClickHandler() {
-    Actions.savePage(this.props.route.join('/'), {
-      title: 'pageNew',
+    Actions.savePage(this.props.route.join('/'),this._oldTitle, {
+      title: this._title,
       content: this._editorContent
     });
   },
@@ -45,9 +53,9 @@ export default React.createClass({
           </div>
         </div>
         <form>
-          <Input type="text" label="Title" placeholder="Please input a page tile." defaultValue={this.props.currentPage.title}/>
+          <Input type="text" label="Title" placeholder="Please input a page tile." defaultValue={this._title} onChange={this._titleChangeHandler}/>
           <Input label="Content" wrapperClassName="wrapper">
-            <TinyMCE content={this.props.currentPage.content} config={{
+            <TinyMCE content={this._editorContent} config={{
               plugins: 'autolink link image lists print preview',
               toolbar: 'undo redo | bold italic | alignleft aligncenter alignright',
               min_height: Constants.EDITOR_MIN_HEIGHT

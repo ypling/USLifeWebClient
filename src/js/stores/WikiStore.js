@@ -7,8 +7,8 @@ import Dispatcher from '../Dispatcher';
 import Constants from '../Constants';
 
 // data storage
-var _currentPage = {title:"pagedefault",content:"<p>Empty page</p>"};
-var _currentView = Constants.WikiViews.CONTENT;
+var _currentPage;
+var _currentView;
 var _folderItems;
 var _route = [];
 // add private functions to modify data
@@ -24,7 +24,7 @@ function _savePage(page) {
 }
 
 function _cencelEdit() {
-  _currentView = Constants.WikiViews.CONTENT;
+  _currentView = (_currentPage)?Constants.WikiViews.CONTENT:Constants.WikiViews.FOLDER;
   WikiStore.emitChange();
 }
 
@@ -35,13 +35,19 @@ function _routing(route, items) {
   WikiStore.emitChange();
 }
 
-function _selectPage(page){
+function _selectPage(page) {
   _currentView = Constants.WikiViews.CONTENT;
   _currentPage = page;
   WikiStore.emitChange();
 }
 
-function _createFolder(){
+function _createFolder() {
+  WikiStore.emitChange();
+}
+
+function _createPage(){
+  _currentPage=null;
+  _currentView = Constants.WikiViews.EDITOR;
   WikiStore.emitChange();
 }
 // Facebook style store creation.
@@ -94,6 +100,8 @@ const WikiStore = assign({}, EventEmitter.prototype, {
         case Constants.ActionTypes.CREATE_FOLDER:
           _createFolder();
           break;
+        case Constants.ActionTypes.CREATE_PAGE:
+          _createPage();
       }
     })
 });
