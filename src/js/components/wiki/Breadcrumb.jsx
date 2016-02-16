@@ -3,9 +3,9 @@ import React from 'react';
 export default React.createClass({
   //react life cycles
   render() {
-    var _link = "";
+    var _link = '/';
     var listItems = this.props.route.map(function(item, index, arr) {
-      _link += '/' + item;
+      _link += item + '/';
       if (this.props.activeLastOne || arr.length !== index + 1) {
         return (<li key={index}>
           <a href={'#/wiki' + _link}>{item}</a>

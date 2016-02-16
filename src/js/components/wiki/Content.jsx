@@ -4,11 +4,13 @@ import Editor from './Editor.jsx';
 import Actions from '../../actions/WikiActions';
 import Breadcrumb from './Breadcrumb.jsx';
 import {PageHeader} from 'react-bootstrap';
-
 export default React.createClass({
   //react life cycles
   _editClickHandler() {
     Actions.editPage();
+  },
+  _deleteClickHandler() {
+    Actions.deletePage(this.props.route.join('/'),this.props.currentPage.title);
   },
   render() {
     return (
@@ -20,6 +22,10 @@ export default React.createClass({
               <button className="btn btn-default" onClick={this._editClickHandler}>
                 <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 &nbsp;Edit
+              </button>
+              <button className="btn btn-default" onClick={this._deleteClickHandler}>
+                <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                &nbsp;Delete
               </button>
             </div>
           </div>

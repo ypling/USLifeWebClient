@@ -1,16 +1,15 @@
-import assign from 'object-assign';
 import {
   EventEmitter
 }
 from 'events';
 import Dispatcher from '../Dispatcher';
 import Constants from '../Constants';
-
 // data storage
 var _currentPage;
 var _currentView;
 var _folderItems;
 var _route = [];
+var _uploadedImageURL;
 // add private functions to modify data
 function _editPage() {
   _currentView = Constants.WikiViews.EDITOR;
@@ -24,7 +23,7 @@ function _savePage(page) {
 }
 
 function _cancelEdit() {
-  _currentView = (_currentPage)?Constants.WikiViews.CONTENT:Constants.WikiViews.FOLDER;
+  _currentView = (_currentPage) ? Constants.WikiViews.CONTENT : Constants.WikiViews.FOLDER;
   WikiStore.emitChange();
 }
 
@@ -42,33 +41,41 @@ function _selectPage(page) {
 }
 
 function _createFolder() {
-  WikiStore.emitChange();
+
 }
 
-function _createPage(){
-  _currentPage=null;
+function _createPage() {
+  _currentPage = null;
   _currentView = Constants.WikiViews.EDITOR;
   WikiStore.emitChange();
 }
+
+function _uploadImage(url) {
+  _uploadedImageURL = url;
+  WikiStore.emitChange();
+}
+
+function _deletePage(){
+  _currentPage = null;
+}
 // Facebook style store creation.
-const WikiStore = assign({}, EventEmitter.prototype, {
+const WikiStore = Object.assign({}, EventEmitter.prototype, {
   // public methods used by Controller-View to operate on data
   getCurrentPage() {
       return _currentPage;
     },
-
     getCurrentView() {
       return _currentView;
     },
-
     getFolderItems() {
       return _folderItems;
     },
-
     getRoute() {
       return _route;
     },
-
+    getUploadedImageURL() {
+      return _uploadedImageURL;
+    },
     addChangeListener(callback) {
       this.on(Constants.CHANGE_EVENTS.WIKI_STORE, callback);
     },
@@ -102,8 +109,14 @@ const WikiStore = assign({}, EventEmitter.prototype, {
           break;
         case Constants.ActionTypes.CREATE_PAGE:
           _createPage();
+          break;
+        case Constants.ActionTypes.UPLOAD_IMAGE:
+          _uploadImage(action.url);
+          break;
+        case Constants.ActionTypes.DELETE_PAGE:
+          _deletePage();
+          break;
       }
     })
 });
-
 export default WikiStore;

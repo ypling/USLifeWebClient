@@ -1,12 +1,11 @@
 import React from 'react';
-import WikiStore from '../../stores/WikiStore.js'
-
+import HomeStore from '../../stores/HomeStore.js';
+import Home from './Home.jsx';
 export default React.createClass({
-  _getStoreState(){
-      //call store getters.
-
-      //return state object.
-      return {}
+  _getStoreState() {
+    //call store getters.
+    //return state object.
+    return {}
   },
   _onChange() {
     this.setState(this._getStoreState());
@@ -15,17 +14,13 @@ export default React.createClass({
     return this._getStoreState();
   },
   componentDidMount() {
-    WikiStore.addChangeListener(this._onChange);
+    HomeStore.addChangeListener(this._onChange);
   },
   componentWillUnmount() {
-    WikiStore.removeChangeListener(this._onChange);
+    HomeStore.removeChangeListener(this._onChange);
   },
-
   //other react life cycles
-
   render() {
-    return (
-        <div></div>
-    );
+    return (<Home/>);
   }
 });

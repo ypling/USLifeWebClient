@@ -9,7 +9,13 @@ export default React.createClass({
     return (
         <div>
           <Link to="/wiki">
-            <button onClick={this._WikiClickHandler}>Wiki</button>
+            <button>Wiki</button>
+          </Link>
+          <Link to="/sdk">
+            <button>SDK</button>
+          </Link>
+          <Link to="/home">
+            <button>Home</button>
           </Link>
         </div>
     );

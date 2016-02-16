@@ -16,7 +16,7 @@ export default React.createClass({
   _createFolderClickHandler() {
     var folderName = prompt('create folder', 'please enter a folder name');
     if (folderName) {
-      Actions.createFolder(this.props.route.join('/') + '/' + folderName);
+      Actions.createFolder(this.props.route.join('/') + folderName);
     }
   },
   _createPageClickHandler(){

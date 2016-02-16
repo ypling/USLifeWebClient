@@ -18,6 +18,11 @@ export default React.createClass({
       this._oldTitle = this.props.currentPage.title;
     }
   },
+  componentWillReceiveProps(nextProps){
+    if(this._fileUploadCallback!==undefined && nextProps.uploadedImageURL!==undefined){
+      this._fileUploadCallback(nextProps.uploadedImageURL);
+    }
+  },
   //private
   _editorChangeHandler(event) {
     this._editorContent = event.target.getContent();
@@ -42,9 +47,8 @@ export default React.createClass({
   },
   _fileInputChangeHandler(event){
     var file = event.target.files[0];
-    //TODO:call action for upload file;
     if(file){
-      this._fileUploadCallback(file.name);
+      Actions.uploadImage(file);
     }
   },
   render() {
@@ -72,7 +76,8 @@ export default React.createClass({
               plugins: 'autolink link image lists print preview',
               toolbar: 'undo redo | bold italic | image | alignleft aligncenter alignright',
               file_picker_callback:this._pickFileClickHandler,
-              min_height: Constants.EDITOR_MIN_HEIGHT
+              min_height: Constants.EDITOR_MIN_HEIGHT,
+              image_prepend_url: "http://www.tinymce.com/images/"
             }} onChange={this._editorChangeHandler}/>
           </Input>
           <input style={{display:'none'}} ref='fileInput' type="file" id="myFile" onChange={this._fileInputChangeHandler}/>
